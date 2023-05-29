@@ -1,4 +1,4 @@
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from api.validators import unique_number_validator
@@ -20,7 +20,8 @@ class Car(models.Model):
     current_location = models.ForeignKey(Location, on_delete=models.CASCADE)
     carrying_capacity = models.IntegerField(
         validators=[
-            MaxValueValidator(1000)
+            MaxValueValidator(1000),
+            MinValueValidator(1),
         ])
 
     def __str__(self):
@@ -30,5 +31,10 @@ class Car(models.Model):
 class Shipment(models.Model):
     pickup_location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='pickups')
     delivery_location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='deliveries')
-    weight = models.IntegerField()
+    weight = models.IntegerField(
+        validators=[
+            MaxValueValidator(1000),
+            MinValueValidator(1),
+        ]
+    )
     description = models.TextField()

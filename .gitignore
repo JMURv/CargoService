@@ -5,3 +5,4 @@ celerybeat-schedule.dir
 templates
 __pycache__
 migrations
+data
