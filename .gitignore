@@ -6,3 +6,4 @@ templates
 __pycache__
 migrations
 data
+.env
